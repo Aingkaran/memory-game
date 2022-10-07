@@ -1,7 +1,7 @@
 import counterFunc from './components/counterFunction.js';
 import './styles/App.css';
 import React, { useState, useEffect } from "react";
-
+import Pokemon from './components/Pokemon'
 
 const App=()=> {
   const [color, setColor] = useState("black");
@@ -38,6 +38,7 @@ const App=()=> {
           }}>
             Click Here
         </div>
+        <Pokemon></Pokemon>
     </div>
   );
 }
