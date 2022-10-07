@@ -25,17 +25,7 @@ const App=()=> {
 
   return (
     <div className="App">
-      <div
-          id="myDiv"
-          style={{
-            color: "white",
-            width: "100px",
-            height: "100px",
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            backgroundColor: color,
-          }}>
+      <div>
             Click Here
         </div>
         <Pokemon></Pokemon>

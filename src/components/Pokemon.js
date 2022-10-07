@@ -17,24 +17,27 @@ import alakazam from '../Images/12.png';
 
 const Pokemon=()=>{
     const [pokemonArray, setpokemonArray]=useState([charizard,blastoise,venasaur,greninja,dragonite,pikachu,sceptile,infernape,mewtwo,golem,machomp,alakazam])
+    const [randomArray,setrandomArray]=useState([])
 
+    const pokemonRandom=()=>{
+        let newArray=[]
+        for (let i=0;i<pokemonArray.length;i++){
+            setpokemonArray(newArray.push(pokemonArray[i]))
+
+        }
+    }
 
     return(
+        <div>        
+            <div className="pokemonCards">
+                {pokemonArray.map((pokemon) => (
+                    <img alt="pokemon" src={pokemon}></img>
 
-        <div className="pokemonCards">
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
-            <img src={pokemonArray[Math.floor(Math.random() * 10)]}></img>
+                    ))}
+            </div>
+                    
         </div>
+
     )
 }
 
