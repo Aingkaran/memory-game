@@ -20,15 +20,21 @@ const Pokemon=()=>{
     const [randomArray,setrandomArray]=useState([])
 
     const pokemonRandom=()=>{
-        let newArray=[]
-        for (let i=0;i<pokemonArray.length;i++){
-            setpokemonArray(newArray.push(pokemonArray[i]))
+        let pokemonsubArray= pokemonArray
+        let index= pokemonsubArray.length
+        while (index != 0){
+            let random_num = Math.floor(Math.random() * index)
+            index--;
+            [pokemonsubArray[index], pokemonsubArray[random_num]] = [pokemonsubArray[random_num], pokemonsubArray[index]];
 
-        }
+        setpokemonArray(pokemonsubArray)
     }
 
+}
+
     return(
-        <div>        
+        <div>   
+            <button onClick={pokemonRandom}>Array Action</button>    
             <div className="pokemonCards">
                 {pokemonArray.map((pokemon) => (
                     <img alt="pokemon" src={pokemon}></img>
