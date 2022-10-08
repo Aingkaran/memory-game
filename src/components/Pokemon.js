@@ -14,10 +14,12 @@ import golem from '../Images/10.png';
 import machomp from '../Images/11.png';
 import alakazam from '../Images/12.png';
 
+import uniqid from "uniqid";
+
 
 const Pokemon=()=>{
     const [pokemonArray, setpokemonArray]=useState([charizard,blastoise,venasaur,greninja,dragonite,pikachu,sceptile,infernape,mewtwo,golem,machomp,alakazam])
-    const [randomArray,setrandomArray]=useState([])
+
 
     const pokemonRandom=()=>{
         let pokemonsubArray= pokemonArray
@@ -26,18 +28,21 @@ const Pokemon=()=>{
             let random_num = Math.floor(Math.random() * index)
             index--;
             [pokemonsubArray[index], pokemonsubArray[random_num]] = [pokemonsubArray[random_num], pokemonsubArray[index]];
+            setpokemonArray(pokemonsubArray)
 
-        setpokemonArray(pokemonsubArray)
-    }
+        }
 
-}
+        }
+            
+          
 
     return(
         <div>   
-            <button onClick={pokemonRandom}>Array Action</button>    
+            <button className="btn" onClick={pokemonRandom}>CLICK ME</button>
+
             <div className="pokemonCards">
                 {pokemonArray.map((pokemon) => (
-                    <img alt="pokemon" src={pokemon}></img>
+                    <img className="images" key={uniqid()} alt={pokemon} src={pokemon}></img>
 
                     ))}
             </div>

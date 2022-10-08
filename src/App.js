@@ -4,29 +4,29 @@ import React, { useState, useEffect } from "react";
 import Pokemon from './components/Pokemon'
 
 const App=()=> {
-  const [color, setColor] = useState("black");
-
+  const [counter, setCounter] = useState(0);
+ 
   useEffect(() => {
-    const changeColorOnClick = () => {
-      if (color === "black") {
-        setColor("red");
-      } else {
-        setColor("black");
+    const nextPokemon = () => {
+      if (counter==0){
+        setCounter(1)
+      }
+      else{
+        setCounter(0)
       }
     };
-    
-    document.addEventListener("click", changeColorOnClick);
+    const btn=document.querySelector(".btn")
+    btn.addEventListener("click", nextPokemon);
 
     return () => {
-      document.removeEventListener("click", changeColorOnClick);
+      btn.removeEventListener("click", nextPokemon);
     };
-  }, [color]);
+  },[counter]);
 
 
   return (
     <div className="App">
       <div>
-            Click Here
         </div>
         <Pokemon></Pokemon>
     </div>
