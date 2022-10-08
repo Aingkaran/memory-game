@@ -19,7 +19,6 @@ import uniqid from "uniqid";
 
 const Pokemon=()=>{
     const [pokemonArray, setpokemonArray]=useState([charizard,blastoise,venasaur,greninja,dragonite,pikachu,sceptile,infernape,mewtwo,golem,machomp,alakazam])
-    const [counter, setCounter] = useState(0);
 
 
     const pokemonRandom=()=>{
@@ -34,26 +33,6 @@ const Pokemon=()=>{
         }
 
         }
-
-    useEffect(() => {
-        const nextPokemon = () => {
-            if (counter==0){
-            setCounter(1)
-            }
-            else{
-            setCounter(0)
-            }
-        };
-        const btn=document.querySelectorAll(".images")
-        btn.forEach((button)=>{
-            button.addEventListener("click", nextPokemon);
-        })
-    
-        return () => {
-            btn.forEach((button)=>{
-                button.removeEventListener("click", nextPokemon);
-            })        };
-        },[counter]);
             
           
 
