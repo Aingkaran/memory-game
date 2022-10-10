@@ -24,7 +24,7 @@ const App=()=> {
   const [bestScore, setbestScore]=useState(0)
   const [selectedPokemon, setSelectedPokemon]= useState([])
 
-  const [closeBtn, setcloseBtn]=useState(true)
+  const [closeBtn, setcloseBtn]=useState(false)
 
 
   const closeWindow=()=>{
@@ -57,17 +57,25 @@ const App=()=> {
       setSelectedPokemon([])
     }
     else{
-      setStreak(Streak+1)
+      if (Streak+1==12){
+        setbestScore(12)
+        setStreak(0)
+        setSelectedPokemon([])
+        setcloseBtn(true)
+        
+      }
+      else{
+        setStreak(Streak+1)
+      }
+
       
     }
   }
 
   const gameControl=(e)=>{
+    pokemonRandom()
     countStreak(e)
-    if (Streak==12){
-      console.log("you win!")
-    }
-
+  
   }
 
 
