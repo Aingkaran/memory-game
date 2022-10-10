@@ -2,6 +2,7 @@ import './styles/App.css';
 import React, { useState, useEffect } from "react";
 import Pokemon from './components/Pokemon'
 import Counter from './components/Counter'
+import Popup from './components/Popup'
 
 import charizard from './Images/01.png';
 import blastoise from './Images/02.png';
@@ -22,6 +23,15 @@ const App=()=> {
   const [Streak, setStreak]=useState(0)
   const [bestScore, setbestScore]=useState(0)
   const [selectedPokemon, setSelectedPokemon]= useState([])
+
+  const [closeBtn, setcloseBtn]=useState(true)
+
+
+  const closeWindow=()=>{
+      if (closeBtn==true){
+          setcloseBtn(false)
+      }
+    }
     
   const pokemonRandom=()=>{
       let pokemonsubArray= [...pokemonArray]
@@ -37,27 +47,34 @@ const App=()=> {
       }
 
   const countStreak=(e)=>{
-    pokemonRandom()
     let selectedArray = [...selectedPokemon,e.target.alt]
     setSelectedPokemon(selectedArray)
     if (hasDuplicates(selectedArray)){
+      if (Streak>bestScore){
+        setbestScore(Streak)
+      }
       setStreak(0)
       setSelectedPokemon([])
     }
     else{
       setStreak(Streak+1)
+      
     }
   }
+
+  const gameControl=(e)=>{
+    countStreak(e)
+    if (Streak==12){
+      console.log("you win!")
+    }
+
+  }
+
+
 
   function hasDuplicates(arr) {
     return arr.some(x => arr.indexOf(x) !== arr.lastIndexOf(x));
   }
-
- 
-
-
-
-
 
   return (
     <div className="App">
@@ -69,8 +86,12 @@ const App=()=> {
           <Counter streak={Streak} best={bestScore}></Counter>
       </div>
       <div className="Pokemon-Array">
-        <Pokemon randomFunction={countStreak} Array={pokemonArray}></Pokemon>
+        <Pokemon randomFunction={gameControl} Array={pokemonArray}></Pokemon>
       </div>
+      <Popup trigger={closeBtn} closeWindowFunc={closeWindow}>
+        <button>CLOSE</button>
+      </Popup>
+
         
     </div>
   );
