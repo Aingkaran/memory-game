@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Pokemon.css"
-
-
-
 import uniqid from "uniqid";
 import charizard from '../Images/01.png';
 import blastoise from '../Images/02.png';

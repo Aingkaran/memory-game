@@ -1,7 +1,7 @@
-import counterFunc from './components/counterFunction.js';
 import './styles/App.css';
 import React, { useState, useEffect } from "react";
 import Pokemon from './components/Pokemon'
+import Counter from './components/Counter'
 
 import charizard from './Images/01.png';
 import blastoise from './Images/02.png';
@@ -18,9 +18,11 @@ import alakazam from './Images/12.png';
 
 const App=()=> {
   const [pokemonArray, setpokemonArray]=useState([charizard,blastoise,venasaur,greninja,dragonite,pikachu,sceptile,infernape,mewtwo,golem,machomp,alakazam])
-  const [counter, setCounter] = useState(0);
-
-
+  
+  const [Streak, setStreak]=useState(0)
+  const [bestScore, setbestScore]=useState(0)
+  const [selectedPokemon, setSelectedPokemon]= useState([])
+    
   const pokemonRandom=()=>{
       let pokemonsubArray= [...pokemonArray]
       let index= pokemonsubArray.length
@@ -29,42 +31,47 @@ const App=()=> {
       while (index != 0){
           let random_num = Math.floor(Math.random() * index)
           index--;
-          [pokemonsubArray[index], pokemonsubArray[random_num]] = [pokemonsubArray[random_num], pokemonsubArray[index]];
-
+          [pokemonsubArray[index], pokemonsubArray[random_num]] = [pokemonsubArray[random_num], pokemonsubArray[index]]
       }
-
       setpokemonArray(pokemonsubArray)
       }
 
-  // useEffect(() => {
-  //     const nextPokemon = () => {
-  //         if (counter==0){
-  //         setCounter(1)
-  //         }
-  //         else{
-  //         setCounter(0)
-  //         }
-  //     };
-  //     const btn=document.querySelectorAll(".images")
-  //     btn.forEach((button)=>{
-  //         button.addEventListener("click", nextPokemon);
-  //         console.log(button)
-  //     })
+  const countStreak=(e)=>{
+    pokemonRandom()
+    let selectedArray = [...selectedPokemon,e.target.alt]
+    setSelectedPokemon(selectedArray)
+    if (hasDuplicates(selectedArray)){
+      setStreak(0)
+      setSelectedPokemon([])
+    }
+    else{
+      setStreak(Streak+1)
+    }
+  }
 
-  //     return () => {
-  //         btn.forEach((button)=>{
-  //             button.removeEventListener("click", nextPokemon);
-  //         })        };
-  //     },[counter]);
+  function hasDuplicates(arr) {
+    return arr.some(x => arr.indexOf(x) !== arr.lastIndexOf(x));
+  }
+
+ 
+
 
 
 
 
   return (
     <div className="App">
-      <div>
-        </div>
-        <Pokemon randomFunction={pokemonRandom} Array={pokemonArray}></Pokemon>
+      <div className="Header">
+      <img className= "header-title" src="https://fontmeme.com/permalink/221009/883679766a81ed641a7acf28d5ab937b.png" alt="pokemon-font" border="0"></img>
+      </div>
+      <div className="counter">
+        
+          <Counter streak={Streak} best={bestScore}></Counter>
+      </div>
+      <div className="Pokemon-Array">
+        <Pokemon randomFunction={countStreak} Array={pokemonArray}></Pokemon>
+      </div>
+        
     </div>
   );
 }

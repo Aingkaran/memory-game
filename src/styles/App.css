@@ -1,5 +1,12 @@
 .App{
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.header-title{
+    width: min(900px,100vw);
+    border: 20px, solid, black
+
 }
